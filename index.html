@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <h1>Form</h1>
+    </header>
+
+    <main>
+        <form action="">
+            <fieldset>
+                <legend>User Input</legend>
+                <label>Name:
+                    <input type="text" id="first-name">
+                </label>
+                <label for="">Email:
+                    <input type="email">
+                </label>
+            </fieldset>
+            <fieldset>
+                <legend>Pay</legend>
+                <input type="radio" name="payment">Bitcoin
+                <input type="radio" name="payment">DogeCoin
+                <input type="radio" name="payment">Holy code
+            </fieldset>
+            <fieldset>
+                <legend>Shipping</legend>
+                <label for="">
+                    <input type="checkbox" name="">
+                    Send COVID-19
+                </label>
+                <br>
+                <br>
+                <label>Time of Shipment:</label><br>
+                <input type="datetime-local" name="" id="">
+                <label for="Location-choise"><br><br>Choose a shipping destination: </label>
+                <input list="Location" id="Location-choise" name="Location-choise">
+
+                <datalist id="Location">
+                    <option value="STH"></option>
+                    <option value="GTB"></option>
+                    <option value="Bomb"></option>
+                    <option value="Afganistan"></option>
+                </datalist>
+            </fieldset>
+            <fieldset>
+                <legend>Jens</legend>
+                <label for="jens">Type of Jens</label>
+                <select id="jens">
+                    <optgroup label="True"><option>Jens</option><option>Snail</option></optgroup>
+                    <optgroup label="False"><option>Step-Jens</option><option>Father-Jens</option></optgroup>
+                </select>
+                <br>
+                <br>
+                Coolness
+                <br>
+                <input type="range">
+            </fieldset>
+            <fieldset>
+                <legend>Password:</legend>
+                Password
+                <input type="password" name="pass">
+                <br>
+                <br>
+                <input type="reset" value="Send">
+            </fieldset>
+        </form>
+        <form action="">
+            <h1>Comment</h1>
+            <fieldset>
+                <label for="">Comment</label>
+                <input type="text" placeholder="Comment">
+                <br>
+                <br>
+                <input type="reset" value="Reset">
+                <br>
+                <br>
+                <input type="submit" value="Send">
+            </fieldset>
+        </form>
+    </main>
+    
+</body>
+</html>
