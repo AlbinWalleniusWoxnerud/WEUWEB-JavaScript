@@ -23,3 +23,9 @@ function rehide() {
     document.querySelector(".p").classList.toggle("invisible");
     document.querySelector(".butt").classList.toggle("invisible");
 }
+
+var albin = true;
+var someTest = 'he "was" there';
+var someTestSome = 'he \b there';
+
+console.log(someTestSome)
