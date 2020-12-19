@@ -1,17 +1,31 @@
 let counter = 0;
+let counter2 = 0;
+let point = 0;
 let stop = false;
 let questionfill = document.getElementsByClassName("question");
 let invis = document.getElementsByClassName("invisible");
-var formlength = questionfill.length;
-var correctAnswerArr = Array(formlength);
+let option = document.getElementsByClassName("option");
+let formlength = questionfill.length;
+let correctAnswerArr = Array(formlength);
+let userAnswerArr = Array(formlength);
+
+let as1 = document.getElementsByClassName("qs1");
+let as2 = document.getElementsByClassName("qs2");
+let as3 = document.getElementsByClassName("qs3");
+let as4 = document.getElementsByClassName("qs4");
+
 
 function random_question() {
     if (!stop) {
+        document.querySelector(".start").classList.toggle("invisible1");
+        stop = true;
+    }
 
         //Toggle in the invisible elements
         // let invis = document.getElementsByClassName("invisible");
         invis[0].classList.toggle("invisible");
 
+    if (counter < formlength) {
         //Randomly choose an operator with random variables
         let rndOperator = Math.round(Math.floor(Math.random() * 4));
         let A = (Math.floor(Math.random() * 100) + 1);
@@ -22,19 +36,19 @@ function random_question() {
         switch (rndOperator) {
             case 0:
                 answer = (A / B);
-                questionfill[counter].innerHTML = (`Question ${counter+1}: ${A} / ${B} = ?`);
+                questionfill[counter].innerHTML = (`Question ${counter + 1}: ${A} / ${B} = ?`);
                 break;
             case 1:
                 answer = (A * B);
-                questionfill[counter].innerHTML = (`Question ${counter+1}: ${A} * ${B} = ?`);
+                questionfill[counter].innerHTML = (`Question ${counter + 1}: ${A} * ${B} = ?`);
                 break;
             case 2:
                 answer = (A - B);
-                questionfill[counter].innerHTML = (`Question ${counter+1}: ${A} - ${B} = ?`);
+                questionfill[counter].innerHTML = (`Question ${counter + 1}: ${A} - ${B} = ?`);
                 break;
             case 3:
                 answer = (A + B);
-                questionfill[counter].innerHTML = (`Question ${counter+1}: ${A} + ${B} = ?`);
+                questionfill[counter].innerHTML = (`Question ${counter + 1}: ${A} + ${B} = ?`);
                 break;
         }
 
@@ -52,49 +66,100 @@ function random_question() {
         //Randomized the options/answers, 1 true 3 false
         let answers = [
             (`${answer}`),
-            (`${(answer) - (Math.floor(Math.random() * 7)+1)}`),
-            (`${(answer) * (Math.floor(Math.random() * 1.2)+0.8)}`),
-            (`${(answer) + (Math.floor(Math.random() * 7)+1)}`),
+            (`${(answer) - (Math.floor(Math.random() * 7) + 1)}`),
+            (`${(answer) * (Math.floor(Math.random() * 1.2) + 0.8)}`),
+            (`${(answer) + (Math.floor(Math.random() * 7) + 1)}`),
         ];
 
         //Shuffle array
-        let array = [ 0, 1, 2, 3];
-            let m = array.length, t, i;
-            while (m) {
-                i = Math.floor(Math.random() * m--);
-                t = array[m];
-                array[m] = array[i];
-                array[i] = t;
-            }
+        let array = [0, 1, 2, 3];
+        let m = array.length, t, i;
+        while (m) {
+            i = Math.floor(Math.random() * m--);
+            t = array[m];
+            array[m] = array[i];
+            array[i] = t;
+        }
 
         //Use shuffled array to randomly assign the options/answers
-        let as1 = document.getElementsByClassName("qs1");
         as1[counter].innerHTML = answers[array[0]];
-
-        let as2 = document.getElementsByClassName("qs2");
         as2[counter].innerHTML = answers[array[1]];
-
-        let as3 = document.getElementsByClassName("qs3");
         as3[counter].innerHTML = answers[array[2]];
-
-        let as4 = document.getElementsByClassName("qs4");
         as4[counter].innerHTML = answers[array[3]];
         
-        if (counter + 1 == formlength) {
-        stop = true;
-            // counter = 0;
-        }
-        else {
-            counter++;
-        }
+        counter++;
+        
     }
 }
-/* function Check() {
-    // let useranswers = document.getElementsByTagName("input:checked");
+function Check() {
     let x = document.querySelectorAll("input[type='radio']:checked");
-    console.log(x[0])
+    
+    document.querySelector(".formQuestions").classList.toggle("invisible");
+    document.querySelector(".result").classList.toggle("invisible");
+
+    for (let i = 0; i < x.length; i++) userAnswerArr[i] = parseInt(x[i].value);
+    for (let i = 0; i < x.length; i++) {
+        switch (userAnswerArr[i]) {
+            case 1:
+                userAnswerArr[i] = as1[i].innerHTML;
+                break;
+            case 2:
+                userAnswerArr[i] = as2[i].innerHTML;
+                break;
+            case 3:
+                userAnswerArr[i] = as3[i].innerHTML;
+                break;
+            case 4:
+                userAnswerArr[i] = as4[i].innerHTML;
+                break;
+        }
+        
+    }
+    for (let i = 0; i < formlength; i++) {
+        if (userAnswerArr[i] == correctAnswerArr[i]) {
+            point++;
+        }
+    }
+
+    document.getElementById("results").innerHTML = "Correct answers: " + point;
+if (point < 2) {
+    document.getElementById("grade").innerHTML = "You got an F-";
+}
+else if (point >= 2 && point < 6) {
+    document.getElementById("grade").innerHTML = "You got an F";
+}
+else if (point == 6) {
+    document.getElementById("grade").innerHTML = "You got an E";
+}
+else if (point == 7) {
+    document.getElementById("grade").innerHTML = "You got a D";
+}
+else if (point == 8) {
+    document.getElementById("grade").innerHTML = "You got a C";
+}
+else if (point == 9) {
+    document.getElementById("grade").innerHTML = "You got a B";
+}
+else if (point == 10) {
+    document.getElementById("grade").innerHTML = "You got an A";
+    }
 }
 
+function disable() {
+    for (let index = 0; index < 4; index++) {
+        option[counter2].disabled = true;
+        counter2++;
+    }
+    random_question();
+}
+
+// function redo() {
+//     document.querySelector(".result").classList.toggle("invisible");
+//     document.querySelector(".formQuestions").reset();
+//     random_question();
+// }
+
+/*
 document.getElementsClassName("option").addEventlistener("click", unHide);
 
 function unHide() {
